@@ -21,7 +21,7 @@ int main(){
 	init_relarr(a);
 	char rname[MAX_RELNM_SIZE+1];
 	char jname[MAX_RELNM_SIZE*2];
-	int t = 1;
+	int t = 0;
 	while(t != -1){
 		printf("\nCURRENT MODEL: base\n");
 		printf("CURRENT RELATION: %s\n", a->rel_nm);
@@ -58,6 +58,7 @@ int main(){
 				printf("Which relation? Enter a number corresponding to its position on the list:\n");
 				printm(base);
 				scanf("%d", &t);
+				if(t < 1 || t > MAX_RELNM_SIZE)
 				a = &base.rel_arr[(t - 1)];
 				printf("Selected relation %d!\n", t);
 				break;

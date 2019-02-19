@@ -25,6 +25,7 @@ void init_relarr(Rel* r){
 		strcpy(r->attr_nms[i], "-No Name-");
 		strcpy(r->c_keys[i], "-");
 	}
+	strcpy(r->rel_nm, "-");
 	strcpy(r->p_key, "-");
 }
 
