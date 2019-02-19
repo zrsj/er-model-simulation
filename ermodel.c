@@ -3,7 +3,9 @@ ProgName: ER Model Software
 Author:  zrsj
 Purpose: Creates an abstract ER model in software
 Todo:
-	4. Function for specifying primary and candidate keys
+	*investigate solutions to buffer overflows
+	*variable clearing for deletion/replacement of old/incorrect data
+	*clean up identifiers
 */
 #include "relmod.h"
 
@@ -30,7 +32,7 @@ int main(){
 		printf("You entered: %d\n", t);
 		switch(t){
 			case 1:
-				printf("What is this relation's name?\n");
+				printf("What is this relation's name? [MAX NAME LENGTH: 25 CHARS]\n");
 				scanf("%s", rname);
 				model_pushrel(&base, adel, rname); //adel will always point to a clean, initalised relation
 				a = &base.rel_arr[matchnm(base, rname)];
@@ -39,7 +41,7 @@ int main(){
 				break;
 			case 2:
 				if(rleft(a) > 0){
-					printf("Attribute name?\n");
+					printf("Attribute name? [MAX NAME LENGTH: 25 CHARS]\n");
 					scanf("%s", rname);
 					rel_pushnm(a, rname);
 					break;
@@ -60,7 +62,7 @@ int main(){
 				printf("Selected relation %d!\n", t);
 				break;
 			case 6:
-				printf("Please enter the relationship you wish to specify:\n");
+				printf("Please enter the relationship you wish to specify: [MAX RELATION NAME LENGTH: 50 CHARS]\n");
 				scanf(" %[^\n]s", jname);
 				joinspec(&base, jname);
 				printf("Relationship %s has been specified!\n", jname);

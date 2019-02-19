@@ -39,10 +39,16 @@ void init_modarr(Model* m){
 
 /*PRINTING FUNCTIONS*/
 void printr(Rel r){
+	printf("%s(", r.rel_nm);
 	for(int i = 0; i < MAX_REL_NO; i++){
 		if(strcmp(r.attr_nms[i], "-No Name-") == 0){continue;}
-		printf("%s\n", r.attr_nms[i]);
+		else if(strcmp(r.attr_nms[i+1], "-No Name-") == 0 || i+1 == MAX_REL_NO){
+			printf("%s", r.attr_nms[i]);
+			break;
+		}
+		printf("%s, ", r.attr_nms[i]);
 	}
+	printf(")\n");
 }
 
 void printm(Model m){
