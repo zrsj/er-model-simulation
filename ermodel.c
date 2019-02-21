@@ -58,7 +58,7 @@ int main(){
 				printf("Which relation? Enter a number corresponding to its position on the list:\n");
 				printm(base);
 				scanf("%d", &t);
-				if(t < 1 || t > MAX_RELNM_SIZE)
+				if(t < 1 || t > MAX_RELNM_SIZE) break;
 				a = &base.rel_arr[(t - 1)];
 				printf("Selected relation %d!\n", t);
 				break;
@@ -72,16 +72,17 @@ int main(){
 				printj(base);
 				break;
 			case 8:
-				printf("Which attribute is a primary key? Enter a number corresponding to its position on the list:\n");
+				printf("Which attribute is a primary key? Enter a number corresponding to its position in the relation:\n");
 				printr(*a);
 				scanf("%d", &t);
 				strcat(a->attr_nms[(t - 1)], " {PK}");
 				printf("Specified primary key!\n");
 				break;
 			case 9:
-				printf("Which of these attributes is a candidate key? Enter a number corresponding to its position on the list:\n");
+				printf("Which of these attributes is a candidate key? Enter a number corresponding to its position in the relation:\n");
 				printr(*a);
 				scanf("%d", &t);
+				if(t < 1 || t > MAX_RELNM_SIZE) break;
 				strcat(a->attr_nms[(t - 1)], " {AK}");
 				printf("Specifed candidate key!\n");
 				break;
