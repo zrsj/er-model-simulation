@@ -60,6 +60,24 @@ void printm(Model m){
 	}
 }
 
+void fprintm(Model* m, Rel* r, FILE* fp){
+	fprintf(fp, "MODEL: base\nRELATIONS:\n");
+	for(int i = 0; i < MAX_REL_NO; i++){
+		if(strcmp(m->rel_nms[i], "-No Name-") == 0) continue;
+		r = &m->rel_arr[i];
+		fprintf(fp, "%s(", r->rel_nm);
+		for(int j = 0; j < MAX_REL_NO; j++){
+			if(strcmp(r->attr_nms[j], "-No Name-") == 0){continue;}
+			else if(strcmp(r->attr_nms[j+1], "-No Name-") == 0 || j+1 == MAX_REL_NO){
+				fprintf(fp, "%s", r->attr_nms[j]);
+				break;
+			}
+			fprintf(fp, "%s, ", r->attr_nms[j]);
+		}
+		fprintf(fp, ")\n");
+	}
+}
+
 void printj(Model m){
 	for(int i = 0; i < MAX_REL_NO; i++){
 		printf("%s\n", (strcmp(m.join_list[i], "-No Join-") == 0)?"-":m.join_list[i]);

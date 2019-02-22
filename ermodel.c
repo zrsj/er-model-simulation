@@ -10,6 +10,7 @@ Todo:
 #include "relmod.h"
 
 int main(){
+	FILE* df;
 	Model base;
 	Rel* a = malloc(sizeof(*a)); //dynamically allocate so that no random address assignment occurs
 	if(!a){
@@ -27,7 +28,7 @@ int main(){
 		printf("CURRENT RELATION: %s\n", a->rel_nm);
 		printf("\nWhat would you like to do?\n(1)Append relation to model\n(2)Append attribute to current relation\n(3)Print attributes in relation");
 		printf("\n(4)Print relations in model\n(5)Select relation to modify\n(6)Specify a relationship\n(7)Print relationships");
-		printf("\n(8)Specify primary key for current relation\n(9)Specify candidate key for current relation\n(-1)Quit\n");
+		printf("\n(8)Specify primary key for current relation\n(9)Specify candidate key for current relation\n(10)Print relation to text file\n(-1)Quit\n");
 		scanf("%d", &t);
 		printf("You entered: %d\n", t);
 		switch(t){
@@ -85,6 +86,12 @@ int main(){
 				if(t < 1 || t > MAX_RELNM_SIZE) break;
 				strcat(a->attr_nms[(t - 1)], " {AK}");
 				printf("Specifed candidate key!\n");
+				break;
+			case 10:
+				df = fopen("relations.txt", "w");
+				fprintm(&base, a, df);
+				fclose(df);
+				printf("Successfully printed base relation to file!\n");
 				break;
 			case -1:
 				printf("Now exiting...\n");
